@@ -1,7 +1,11 @@
 use bevy::prelude::*;
-pub struct CustomScene;
+use bevy_rapier2d::prelude::*;
+pub struct CustomScenePlugin;
 
-impl Plugin for CustomScene{
+#[derive(Component)]
+struct BottomFloor;
+
+impl Plugin for CustomScenePlugin{
     fn build(&self,app:&mut App){
         app
         .add_startup_system(load_scene_assets)
@@ -34,5 +38,9 @@ fn load_scene_assets(
                  },
             ..default()
         },   
-    ));
+    ))
+    .insert(RigidBody::Fixed)
+    .insert(Collider::cuboid(2048.,200.))
+    .insert(BottomFloor)
+    ;
 }

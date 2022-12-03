@@ -2,9 +2,10 @@ use bevy::prelude::{ResMut,Transform};
 use bevy::prelude::*;
 use bevy::time::FixedTimestep;
 use bevy::window::PresentMode;
+use bevy_inspector_egui::WorldInspectorPlugin;
 pub mod camera;
 pub mod player;
-pub mod scene;
+pub mod scene; 
 fn main() {
     App::new()
     .add_plugins(DefaultPlugins.set(WindowPlugin {
@@ -17,9 +18,10 @@ fn main() {
         },
         ..default()
     }))
+    .add_plugin(WorldInspectorPlugin::new())
     .add_plugin(camera::CustomCameraPlugin)
-    .add_plugin(scene::CustomScene)
-    .add_plugin(player::CustomPlayer)
+    .add_plugin(scene::CustomScenePlugin)
+    .add_plugin(player::CustomPlayerPlugin)
     .run();
 }
 
